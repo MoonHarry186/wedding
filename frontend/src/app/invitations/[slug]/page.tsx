@@ -4,7 +4,7 @@ import React from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import { Spin, Result, Button } from 'antd';
 import { useInvitationBySlug } from '@/hooks/useInvitations';
-import { ResponsiveInvitationRenderer } from '@/components/invitations/ResponsiveInvitationRenderer';
+import { ScaledCanvasPreviewRenderer } from '@/components/invitations/ScaledCanvasPreviewRenderer';
 import type { CanvasData } from '@/types/editor';
 
 export default function PublicInvitationPage() {
@@ -40,35 +40,19 @@ export default function PublicInvitationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#fdfaf6] py-12 px-4">
-      <div className="mx-auto max-w-4xl">
-        <div className="relative">
-          {invitation.canvasData && (
-            <ResponsiveInvitationRenderer
-              canvasData={invitation.canvasData as CanvasData}
-              variableValues={invitation.variableValues as Record<string, string | number>} 
-            />
-          )}
-        </div>
-        
-        {/* RSVP or Actions Bar (Optional Design) */}
-        <div className="mt-12 text-center">
-          <p className="text-secondary font-serif italic text-xl mb-6">
-            Rất mong được đón tiếp bạn!
-          </p>
-          <Button 
-            type="primary" 
-            size="large" 
-            className="rounded-full px-12 h-14 text-lg bg-primary hover:scale-105 transition-transform"
-          >
-            Phản hồi (RSVP)
-          </Button>
-        </div>
-      </div>
-
-      {/* Footer Branding */}
-      <div className="mt-20 text-center opacity-40 grayscale hover:grayscale-0 transition-all">
-        <p className="text-sm font-serif">Designed with Cinlove</p>
+    <div className="min-h-screen bg-[#f5f5f4]">
+      <div className="mx-auto max-w-3xl">
+        {invitation.canvasData && (
+          <ScaledCanvasPreviewRenderer
+            canvasData={invitation.canvasData as CanvasData}
+            variableValues={
+              invitation.variableValues as Record<
+                string,
+                string | number | boolean | Record<string, unknown>
+              >
+            }
+          />
+        )}
       </div>
     </div>
   );

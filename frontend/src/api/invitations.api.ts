@@ -18,6 +18,17 @@ export const invitationsApi = {
     return data;
   },
 
+  createAdmin: async (payload: {
+    mode: "blank" | "from_template";
+    templateId?: string;
+  }) => {
+    const { data } = await axiosInstance.post<ApiInvitation>(
+      "/invitations/admin",
+      payload,
+    );
+    return data;
+  },
+
   getBySlug: async (slug: string, token?: string) => {
     const { data } = await axiosInstance.get<{ invitation: ApiInvitation }>(`/w/${slug}`, {
       params: { token },
@@ -36,6 +47,28 @@ export const invitationsApi = {
     },
   ) => {
     const { data } = await axiosInstance.put(`/invitations/${id}/variables`, payload);
+    return data;
+  },
+
+  updateMeta: async (
+    id: string,
+    payload: { slug?: string },
+  ) => {
+    const { data } = await axiosInstance.put<ApiInvitation>(
+      `/invitations/${id}/meta`,
+      payload,
+    );
+    return data;
+  },
+
+  updateCanvas: async (
+    id: string,
+    payload: { canvasData: Record<string, unknown> },
+  ) => {
+    const { data } = await axiosInstance.put<ApiInvitation>(
+      `/invitations/${id}/canvas`,
+      payload,
+    );
     return data;
   },
 

@@ -4,6 +4,7 @@ import {
   GoneException,
   ConflictException,
   ForbiddenException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
@@ -12,8 +13,16 @@ import { Invitation } from '../../entities/invitation.entity';
 import { InvitationVariable } from '../../entities/invitation-variable.entity';
 import { TemplateVariable } from '../../entities/template-variable.entity';
 import { TemplateInstance } from '../../entities/template-instance.entity';
+import { Template } from '../../entities/template.entity';
+import { TemplateVersion } from '../../entities/template-version.entity';
+import { Order } from '../../entities/order.entity';
+import { OrderItem } from '../../entities/order-item.entity';
+import { Payment } from '../../entities/payment.entity';
 import type { FillVariablesDto } from './dto/fill-variables.dto';
 import type { PublishInvitationDto } from './dto/publish-invitation.dto';
+import type { CreateAdminInvitationDto } from './dto/create-admin-invitation.dto';
+import type { UpdateInvitationCanvasDto } from './dto/update-invitation-canvas.dto';
+import type { UpdateInvitationMetaDto } from './dto/update-invitation-meta.dto';
 
 @Injectable()
 export class InvitationsService {
@@ -29,8 +38,6 @@ export class InvitationsService {
     private dataSource: DataSource,
   ) {}
 
-  // ─── Tenant: view invitation ──────────────────────────────────────────────
-
   async findOne(tenantId: string, id: string) {
     const inv = await this.loadTenantInvitation(tenantId, id);
     return this.serializeInvitation(inv);
@@ -39,12 +46,13 @@ export class InvitationsService {
   async findAllForTenant(tenantId: string) {
     const invitations = await this.invitationRepo
       .createQueryBuilder('inv')
-      .innerJoin('inv.template', 'tpl', 'tpl.tenant_id = :tenantId', {
+      .innerJoinAndSelect('inv.orderItem', 'orderItem')
+      .innerJoin('orderItem.order', 'order', 'order.tenant_id = :tenantId', {
         tenantId,
       })
       .leftJoinAndSelect('inv.template', 'template')
       .leftJoinAndSelect('inv.templateInstance', 'templateInstance')
-      .leftJoinAndSelect('inv.orderItem', 'orderItem')
+      .leftJoinAndSelect('orderItem.order', 'joinedOrder')
       .leftJoinAndSelect('inv.variables', 'vars')
       .orderBy('inv.created_at', 'DESC')
       .getMany();
@@ -52,7 +60,119 @@ export class InvitationsService {
     return invitations.map((inv) => this.serializeInvitation(inv));
   }
 
-  // ─── Guest: access via token (email link) ────────────────────────────────
+  async createAdmin(tenantId: string, dto: CreateAdminInvitationDto) {
+    return this.dataSource.transaction(async (em) => {
+      const isFromTemplate = dto.mode === 'from_template';
+      let template: Template | null = null;
+      let templateVersion: TemplateVersion | null = null;
+
+      if (isFromTemplate) {
+        template = await em.findOne(Template, {
+          where: { id: dto.templateId, tenantId },
+        });
+        if (!template) {
+          throw new NotFoundException('Template not found');
+        }
+
+        if (template.status !== 'published' || !template.currentVersionId) {
+          throw new BadRequestException(
+            'Template must be published before creating an invitation',
+          );
+        }
+
+        templateVersion = await em.findOne(TemplateVersion, {
+          where: { id: template.currentVersionId },
+        });
+        if (!templateVersion) {
+          throw new NotFoundException('Published template version not found');
+        }
+      }
+
+      const subtotal = isFromTemplate ? Number(template?.price) || 0 : 0;
+
+      const order = await em.save(
+        em.create(Order, {
+          tenantId,
+          customerId: null,
+          customerEmail: '',
+          customerName: '',
+          status: 'pending',
+          subtotal,
+          platformFee: 0,
+          tenantRevenue: subtotal,
+          currency: template?.currency ?? 'VND',
+          paidAt: null,
+        }),
+      );
+
+      const orderItem = await em.save(
+        em.create(OrderItem, {
+          orderId: order.id,
+          templateId: template?.id ?? null,
+          templateTitle: template?.title ?? 'Thiệp tuỳ chỉnh',
+          unitPrice: template?.price ?? 0,
+        }),
+      );
+
+      await em.save(
+        em.create(Payment, {
+          orderId: order.id,
+          provider: 'manual',
+          providerTxnId: null,
+          amount: subtotal,
+          currency: order.currency,
+          status: 'pending',
+          providerResponse: {
+            source: 'admin_manual',
+            mode: dto.mode,
+          },
+        }),
+      );
+
+      const templateInstance = await em.save(
+        em.create(TemplateInstance, {
+          sourceTemplateId: template?.id ?? null,
+          sourceTemplateVersionId: templateVersion?.id ?? null,
+          canvasData: templateVersion?.canvasData ?? {
+            elements: [],
+            canvasHeight: 1000,
+            backgroundColor: '#ffffff',
+          },
+        }),
+      );
+
+      const invitation = await em.save(
+        em.create(Invitation, {
+          orderItemId: orderItem.id,
+          templateId: template?.id ?? null,
+          templateInstanceId: templateInstance.id,
+          customerId: null,
+          customerEmail: '',
+          accessToken: randomUUID(),
+          isPublic: false,
+        }),
+      );
+
+      const createdInvitation = await em.findOne(Invitation, {
+        where: { id: invitation.id },
+        relations: [
+          'template',
+          'template.variables',
+          'templateInstance',
+          'variables',
+          'orderItem',
+          'orderItem.order',
+          'customer',
+        ],
+      });
+
+      if (!createdInvitation) {
+        throw new NotFoundException('Invitation not found after creation');
+      }
+
+      return this.serializeInvitation(createdInvitation);
+    });
+  }
 
   async findByToken(token: string) {
     const inv = await this.invitationRepo.findOne({
@@ -64,8 +184,6 @@ export class InvitationsService {
     return this.buildRenderPayload(inv);
   }
 
-  // ─── Public: access via slug ──────────────────────────────────────────────
-
   async findBySlug(slug: string) {
     const inv = await this.invitationRepo.findOne({
       where: { publicSlug: slug, isPublic: true },
@@ -74,15 +192,10 @@ export class InvitationsService {
     if (!inv) throw new NotFoundException('Invitation not found');
     this.checkExpiry(inv);
 
-    // Increment view count (fire-and-forget)
-    this.invitationRepo
-      .increment({ id: inv.id }, 'viewCount', 1)
-      .catch(() => null);
+    this.invitationRepo.increment({ id: inv.id }, 'viewCount', 1).catch(() => null);
 
     return this.buildRenderPayload(inv);
   }
-
-  // ─── Fill variables ───────────────────────────────────────────────────────
 
   async fillVariables(id: string, dto: FillVariablesDto, accessToken?: string) {
     const inv = await this.loadAndAuthorize(id, accessToken);
@@ -108,10 +221,12 @@ export class InvitationsService {
         }
       }
 
-      // Check if all required variables are now filled
-      const required = await this.templateVarRepo.find({
-        where: { templateId: inv.templateId, required: true },
-      });
+      const required = inv.templateId
+        ? await this.templateVarRepo.find({
+            where: { templateId: inv.templateId, required: true },
+          })
+        : [];
+
       const filled = await em.find(InvitationVariable, {
         where: { invitationId: id },
       });
@@ -129,15 +244,38 @@ export class InvitationsService {
     });
   }
 
-  // ─── Publish (set public URL) ─────────────────────────────────────────────
+  async updateMeta(
+    tenantId: string,
+    id: string,
+    dto: UpdateInvitationMetaDto,
+  ) {
+    const inv = await this.loadTenantInvitation(tenantId, id);
+
+    if (dto.slug !== undefined) {
+      const slug = dto.slug.trim() || null;
+      if (slug) {
+        const existing = await this.invitationRepo.findOne({
+          where: { publicSlug: slug },
+        });
+        if (existing && existing.id !== id) {
+          throw new ConflictException(`Slug '${slug}' already in use`);
+        }
+      }
+      inv.publicSlug = slug;
+    }
+
+    await this.invitationRepo.save(inv);
+    return this.serializeInvitation(inv);
+  }
 
   async publish(tenantId: string, id: string, dto: PublishInvitationDto) {
     const inv = await this.loadTenantInvitation(tenantId, id);
 
-    // Validate all required vars are filled
-    const required = await this.templateVarRepo.find({
-      where: { templateId: inv.templateId, required: true },
-    });
+    const required = inv.templateId
+      ? await this.templateVarRepo.find({
+          where: { templateId: inv.templateId, required: true },
+        })
+      : [];
     const filled = await this.varRepo.find({ where: { invitationId: id } });
     const filledKeys = new Set(filled.map((f) => f.variableKey));
     const missing = required.filter((r) => !filledKeys.has(r.key));
@@ -151,8 +289,9 @@ export class InvitationsService {
     const existing = await this.invitationRepo.findOne({
       where: { publicSlug: slug },
     });
-    if (existing && existing.id !== id)
+    if (existing && existing.id !== id) {
       throw new ConflictException(`Slug '${slug}' already in use`);
+    }
 
     inv.isPublic = true;
     inv.publicSlug = slug;
@@ -161,15 +300,11 @@ export class InvitationsService {
     return { url: `${slug}`, publicSlug: slug };
   }
 
-  // ─── Unpublish ────────────────────────────────────────────────────────────
-
   async unpublish(tenantId: string, id: string) {
     const inv = await this.loadTenantInvitation(tenantId, id);
     inv.isPublic = false;
     return this.invitationRepo.save(inv);
   }
-
-  // ─── Preview (tenant sees rendered canvas + variables) ───────────────────
 
   async preview(tenantId: string, id: string) {
     const inv = await this.loadTenantInvitation(tenantId, id);
@@ -179,13 +314,25 @@ export class InvitationsService {
     return this.renderCanvas(instance.canvasData, variables);
   }
 
-  // ─── Helpers ─────────────────────────────────────────────────────────────
+  async updateCanvas(
+    tenantId: string,
+    id: string,
+    dto: UpdateInvitationCanvasDto,
+  ) {
+    const inv = await this.loadTenantInvitation(tenantId, id);
+    const instance = await this.loadTemplateInstance(inv);
+    instance.canvasData = dto.canvasData;
+    await this.instanceRepo.save(instance);
+    inv.templateInstance = instance;
+    return this.serializeInvitation(inv);
+  }
 
   private async loadAndAuthorize(id: string, accessToken?: string) {
     const inv = await this.invitationRepo.findOne({ where: { id } });
     if (!inv) throw new NotFoundException('Invitation not found');
-    if (accessToken && inv.accessToken !== accessToken)
+    if (accessToken && inv.accessToken !== accessToken) {
       throw new ForbiddenException('Invalid access token');
+    }
     this.checkExpiry(inv);
     return inv;
   }
@@ -199,11 +346,14 @@ export class InvitationsService {
         'templateInstance',
         'variables',
         'orderItem',
+        'orderItem.order',
         'customer',
       ],
     });
     if (!inv) throw new NotFoundException('Invitation not found');
-    if (inv.template.tenantId !== tenantId) throw new ForbiddenException();
+    if (inv.orderItem?.order?.tenantId !== tenantId) {
+      throw new ForbiddenException();
+    }
     return inv;
   }
 
@@ -226,8 +376,9 @@ export class InvitationsService {
   }
 
   private async loadTemplateInstance(inv: Invitation) {
-    if (!inv.templateInstanceId)
+    if (!inv.templateInstanceId) {
       throw new NotFoundException('Template instance not found');
+    }
 
     const instance =
       inv.templateInstance ??
@@ -243,7 +394,6 @@ export class InvitationsService {
     canvasData: Record<string, unknown>,
     variables: InvitationVariable[],
   ) {
-    // Replace {{variable_key}} placeholders in canvas elements with actual values
     const varMap = Object.fromEntries(
       variables.map((v) => [v.variableKey, v.valueText ?? '']),
     );
@@ -269,8 +419,9 @@ export class InvitationsService {
       orderItemId: inv.orderItemId,
       templateId: inv.templateId,
       templateInstanceId: inv.templateInstanceId,
-      templateTitle: inv.template?.title ?? null,
-      customerName: inv.customer?.fullName ?? null,
+      templateTitle: inv.template?.title ?? inv.orderItem?.templateTitle ?? null,
+      customerName:
+        inv.customer?.fullName ?? inv.orderItem?.order?.customerName ?? null,
       customerEmail: inv.customerEmail,
       accessToken: inv.accessToken,
       slug: inv.publicSlug,

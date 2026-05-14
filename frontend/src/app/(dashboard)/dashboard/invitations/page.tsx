@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import {
+  App,
   Table,
   Card,
   Typography,
@@ -18,6 +19,9 @@ import {
   Row,
   Col,
   Empty,
+  Form,
+  Modal,
+  Radio,
 } from "antd";
 import {
   RiSearchLine,
@@ -29,7 +33,11 @@ import {
   RiLayoutLine,
   RiMailSendLine,
 } from "@remixicon/react";
-import { useInvitations } from "@/hooks/useInvitations";
+import { useRouter } from "next/navigation";
+import {
+  useCreateAdminInvitation,
+  useInvitations,
+} from "@/hooks/useInvitations";
 import { useTemplates } from "@/hooks/useTemplates";
 import { useAuthStore } from "@/store/auth.store";
 import type { ApiInvitation } from "@/types/api";
@@ -40,6 +48,8 @@ const { Title, Text } = Typography;
 const { RangePicker } = DatePicker;
 
 export default function InvitationsPage() {
+  const { message } = App.useApp();
+  const router = useRouter();
   const { tenant } = useAuthStore();
   const tenantId = tenant?.id;
   const [search, setSearch] = useState("");
@@ -47,6 +57,12 @@ export default function InvitationsPage() {
   const [, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
   const [selectedInvitation, setSelectedInvitation] =
     useState<ApiInvitation | null>(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [createForm] = Form.useForm<{
+    mode: "blank" | "from_template";
+    templateId?: string;
+  }>();
+  const createMode = Form.useWatch("mode", createForm);
 
   const { data: invitations, isLoading } = useInvitations({
     tenantId: tenantId || undefined,
@@ -55,11 +71,19 @@ export default function InvitationsPage() {
   });
 
   const { data: templates } = useTemplates({ tenantId: tenantId || undefined });
+  const { mutateAsync: createAdminInvitation, isPending: isCreatingInvitation } =
+    useCreateAdminInvitation();
+
+  const publishedTemplates =
+    templates?.filter((template) => template.status === "published") ?? [];
 
   const getVariableDisplay = (
     value: ApiInvitation["variableValues"][string] | undefined,
     fallback: string,
-  ) => (typeof value === "string" || typeof value === "number" ? String(value) : fallback);
+  ) =>
+    typeof value === "string" || typeof value === "number"
+      ? String(value)
+      : fallback;
 
   const columns = [
     {
@@ -99,7 +123,9 @@ export default function InvitationsPage() {
           <div className="w-8 h-10 bg-surface-container rounded-sm border border-outline-variant flex items-center justify-center overflow-hidden">
             <RiLayoutLine size={14} className="text-on-surface-variant" />
           </div>
-          <Text className="text-body-sm">{record.templateTitle || "Mẫu thiệp"}</Text>
+          <Text className="text-body-sm">
+            {record.templateTitle || "Thiệp tuỳ chỉnh"}
+          </Text>
         </Space>
       ),
     },
@@ -116,25 +142,15 @@ export default function InvitationsPage() {
     {
       title: "Trạng thái",
       key: "status",
-      render: () => (
+      render: (_: unknown, record: ApiInvitation) => (
         <Space size={4}>
           <Tag
-            color="processing"
+            color={record.isPublic ? "success" : "default"}
             variant="filled"
             className="rounded-full px-3 text-[11px]"
           >
-            Đã gửi
+            {record.isPublic ? "Công khai" : "Nháp"}
           </Tag>
-          {/* Note: In a real app, these would come from the record */}
-          {Math.random() > 0.5 && (
-            <Tag
-              color="success"
-              variant="filled"
-              className="rounded-full px-3 text-[11px]"
-            >
-              Đã xem
-            </Tag>
-          )}
         </Space>
       ),
     },
@@ -161,17 +177,30 @@ export default function InvitationsPage() {
               }}
             />
           </Tooltip>
-          <Tooltip title="Chỉnh sửa">
+          <Tooltip title="Mở editor">
             <Button
               type="text"
               icon={<RiEditLine size={18} className="text-secondary" />}
-              onClick={() => setSelectedInvitation(record)}
+              onClick={() => router.push(`/editor/invitations/${record.id}`)}
             />
           </Tooltip>
         </Space>
       ),
     },
   ];
+
+  const handleCreateInvitation = async () => {
+    const values = await createForm.validateFields();
+    const createdInvitation = await createAdminInvitation(values);
+    message.success(
+      values.mode === "blank"
+        ? "Đã tạo thiệp trống"
+        : "Đã tạo thiệp mới từ mẫu",
+    );
+    setIsCreateModalOpen(false);
+    createForm.resetFields();
+    router.push(`/editor/invitations/${createdInvitation.id}`);
+  };
 
   return (
     <div className="p-6 max-w-[1600px] mx-auto space-y-6">
@@ -197,12 +226,12 @@ export default function InvitationsPage() {
           icon={<RiMailSendLine size={18} />}
           size="large"
           className="rounded-xl h-12 px-6"
+          onClick={() => setIsCreateModalOpen(true)}
         >
           Gửi thiệp mới
         </Button>
       </div>
 
-      {/* Stats Overview */}
       <Row gutter={24}>
         <Col span={8}>
           <Card
@@ -212,20 +241,12 @@ export default function InvitationsPage() {
             <Statistic
               title={
                 <span className="text-label-caps text-secondary uppercase">
-                  Tổng số thiệp đã gửi
+                  Tổng số thiệp đã tạo
                 </span>
               }
-              value={1284}
+              value={invitations?.length ?? 0}
               prefix={
                 <RiMailSendLine size={20} className="mr-2 text-primary" />
-              }
-              suffix={
-                <Tag
-                  color="success"
-                  className="ml-2 border-none bg-green-50 text-green-600"
-                >
-                  +12%
-                </Tag>
               }
               styles={{ content: { color: "#070235", fontWeight: 600 } }}
             />
@@ -239,11 +260,10 @@ export default function InvitationsPage() {
             <Statistic
               title={
                 <span className="text-label-caps text-secondary uppercase">
-                  Tỷ lệ mở
+                  Đang công khai
                 </span>
               }
-              value={85.2}
-              suffix="%"
+              value={invitations?.filter((item) => item.isPublic).length ?? 0}
               prefix={<RiEyeLine size={20} className="mr-2 text-primary" />}
               styles={{ content: { color: "#070235", fontWeight: 600 } }}
             />
@@ -257,10 +277,14 @@ export default function InvitationsPage() {
             <Statistic
               title={
                 <span className="text-label-caps text-secondary uppercase">
-                  RSVP hoàn tất
+                  Chưa điền thông tin
                 </span>
               }
-              value={412}
+              value={
+                invitations?.filter(
+                  (item) => !item.variableValues || Object.keys(item.variableValues).length === 0,
+                ).length ?? 0
+              }
               prefix={
                 <RiCalendarLine size={20} className="mr-2 text-primary" />
               }
@@ -270,7 +294,6 @@ export default function InvitationsPage() {
         </Col>
       </Row>
 
-      {/* Filters & Table */}
       <Card
         variant="outlined"
         className="shadow-[0px_2px_4px_rgba(30,27,75,0.04)] border-outline-variant"
@@ -318,13 +341,13 @@ export default function InvitationsPage() {
             className: "mt-6",
           }}
           className="border-t border-outline-variant"
-          locale={{ 
+          locale={{
             emptyText: (
-              <Empty 
-                image={Empty.PRESENTED_IMAGE_SIMPLE} 
-                description="Chưa có thiệp mời nào" 
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description="Chưa có thiệp mời nào"
               />
-            ) 
+            ),
           }}
         />
       </Card>
@@ -333,6 +356,77 @@ export default function InvitationsPage() {
         invitation={selectedInvitation}
         onClose={() => setSelectedInvitation(null)}
       />
+
+      <Modal
+        title="Tạo thiệp mới"
+        open={isCreateModalOpen}
+        onCancel={() => {
+          setIsCreateModalOpen(false);
+          createForm.resetFields();
+        }}
+        onOk={() => void handleCreateInvitation()}
+        okText="Tạo thiệp"
+        cancelText="Hủy"
+        confirmLoading={isCreatingInvitation}
+      >
+        <Form
+          form={createForm}
+          layout="vertical"
+          className="pt-4"
+          initialValues={{ mode: "from_template" }}
+        >
+          <Form.Item
+            name="mode"
+            label="Kiểu tạo thiệp"
+            rules={[{ required: true, message: "Vui lòng chọn cách tạo" }]}
+          >
+            <Radio.Group
+              optionType="button"
+              buttonStyle="solid"
+              options={[
+                { label: "Từ template", value: "from_template" },
+                { label: "Thiệp trống", value: "blank" },
+              ]}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="templateId"
+            label="Chọn mẫu thiệp"
+            dependencies={["mode"]}
+            rules={[
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (getFieldValue("mode") !== "from_template") {
+                    return Promise.resolve();
+                  }
+                  if (value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("Vui lòng chọn một mẫu thiệp"),
+                  );
+                },
+              }),
+            ]}
+            extra="Admin tạo nhanh không yêu cầu nhập thông tin khách hàng ở bước này."
+          >
+            <Select
+              placeholder="Chọn một template đã xuất bản"
+              options={publishedTemplates.map((template) => ({
+                label: template.title,
+                value: template.id,
+              }))}
+              showSearch
+              optionFilterProp="label"
+              disabled={
+                publishedTemplates.length === 0 ||
+                createMode !== "from_template"
+              }
+            />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 }

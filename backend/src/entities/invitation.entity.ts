@@ -22,8 +22,8 @@ export class Invitation {
   @Column({ name: 'order_item_id' })
   orderItemId: string;
 
-  @Column({ name: 'template_id' })
-  templateId: string;
+  @Column({ name: 'template_id', type: 'uuid', nullable: true })
+  templateId: string | null;
 
   @Column({ name: 'template_instance_id', type: 'uuid', nullable: true })
   templateInstanceId: string | null;
@@ -64,9 +64,9 @@ export class Invitation {
   @JoinColumn({ name: 'order_item_id' })
   orderItem: OrderItem;
 
-  @ManyToOne(() => Template)
+  @ManyToOne(() => Template, { nullable: true })
   @JoinColumn({ name: 'template_id' })
-  template: Template;
+  template: Template | null;
 
   @ManyToOne(() => TemplateInstance, { nullable: true })
   @JoinColumn({ name: 'template_instance_id' })

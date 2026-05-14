@@ -17,6 +17,7 @@ import {
   Spin,
   Tag,
   Typography,
+  Alert,
 } from "antd";
 import {
   RiCheckLine,
@@ -28,6 +29,7 @@ import {
   useFillInvitationVariables,
   useInvitation,
   usePublishInvitation,
+  useUpdateInvitationMeta,
   useUnpublishInvitation,
 } from "@/hooks/useInvitations";
 import type {
@@ -240,6 +242,7 @@ export default function InvitationDetailDrawer({
   const { data: detail, isLoading, error } = useInvitation(invitationId);
   const fillVariables = useFillInvitationVariables();
   const publishInvitation = usePublishInvitation();
+  const updateInvitationMeta = useUpdateInvitationMeta();
   const unpublishInvitation = useUnpublishInvitation();
 
   const activeInvitation = detail || invitation;
@@ -249,6 +252,8 @@ export default function InvitationDetailDrawer({
   );
   const watchedValues = Form.useWatch([], form) as Record<string, unknown> | undefined;
   const watchedSlug = Form.useWatch("__slug", form) as string | undefined;
+
+  const lastHydratedInvitationIdRef = React.useRef<string | null>(null);
 
   React.useEffect(() => {
     if (!detail) return;
@@ -260,8 +265,12 @@ export default function InvitationDetailDrawer({
         detail.variableValues?.[variable.key],
       );
     });
-    nextValues.__slug = detail.slug || "";
+    nextValues.__slug =
+      lastHydratedInvitationIdRef.current === detail.id
+        ? form.getFieldValue("__slug") ?? detail.slug ?? ""
+        : detail.slug || "";
     form.setFieldsValue(nextValues);
+    lastHydratedInvitationIdRef.current = detail.id;
   }, [detail, form]);
 
   const previewVariableValues = React.useMemo(() => {
@@ -294,9 +303,13 @@ export default function InvitationDetailDrawer({
   );
 
   const shareLink =
-    activeInvitation?.slug && activeInvitation?.accessToken
-      ? `${window.location.origin}/invitations/${activeInvitation.slug}?token=${activeInvitation.accessToken}`
+    activeInvitation?.slug
+      ? `${window.location.origin}/invitations/${activeInvitation.slug}`
       : null;
+
+  const previewPublicLink = watchedSlug?.trim()
+    ? `${window.location.origin}/invitations/${watchedSlug.trim().toLowerCase()}`
+    : null;
 
   const handleCopyLink = async () => {
     if (!shareLink) {
@@ -313,6 +326,10 @@ export default function InvitationDetailDrawer({
     await form.validateFields();
 
     const values = form.getFieldsValue(true) as Record<string, unknown>;
+    await updateInvitationMeta.mutateAsync({
+      id: detail.id,
+      slug: typeof values.__slug === "string" ? values.__slug.trim() || undefined : undefined,
+    });
     await fillVariables.mutateAsync({
       id: detail.id,
       variables: buildVariablesPayload(values, variableDefinitions),
@@ -323,10 +340,11 @@ export default function InvitationDetailDrawer({
   const handlePublish = async () => {
     if (!detail) return;
     await handleSaveVariables();
-    await publishInvitation.mutateAsync({
+    const published = await publishInvitation.mutateAsync({
       id: detail.id,
       slug: watchedSlug?.trim() || undefined,
     });
+    form.setFieldValue("__slug", published.publicSlug);
     message.success("Đã xuất bản thiệp");
   };
 
@@ -429,12 +447,12 @@ export default function InvitationDetailDrawer({
                 </Tag>
               </div>
 
-              {variableDefinitions.length === 0 ? (
-                <Empty
-                  description="Template này chưa có variable nào được publish"
-                />
-              ) : (
-                <Form layout="vertical" form={form}>
+              <Form layout="vertical" form={form}>
+                {variableDefinitions.length === 0 ? (
+                  <Empty
+                    description="Template này chưa có variable nào được publish"
+                  />
+                ) : (
                   <div className="space-y-1">
                     {variableDefinitions
                       .slice()
@@ -446,27 +464,57 @@ export default function InvitationDetailDrawer({
                         />
                       ))}
                   </div>
-                </Form>
-              )}
+                )}
 
-              <Divider />
+                <Divider />
 
-              <div className="space-y-3">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Slug public
-                </label>
-                <Input
-                  className="h-11 rounded-xl"
-                  value={watchedSlug}
-                  onChange={(e) =>
-                    form.setFieldValue("__slug", e.target.value.toLowerCase())
+                <Form.Item
+                  name="__slug"
+                  label={
+                    <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                      Slug public
+                    </span>
                   }
-                  placeholder="vd: lan-va-minh-2026"
-                />
-                <Text type="secondary" className="text-xs">
-                  Bỏ trống để hệ thống tự sinh khi xuất bản.
-                </Text>
-              </div>
+                  rules={[
+                    {
+                      pattern: /^[a-z0-9-]*$/,
+                      message:
+                        "Slug chỉ được chứa chữ thường, số và dấu gạch nối",
+                    },
+                  ]}
+                >
+                  <Input
+                    className="h-11 rounded-xl"
+                    onChange={(e) =>
+                      form.setFieldValue(
+                        "__slug",
+                        e.target.value.toLowerCase().replace(/\s+/g, "-"),
+                      )
+                    }
+                    placeholder="vd: lan-va-minh-2026"
+                  />
+                </Form.Item>
+              </Form>
+
+              <Alert
+                type={activeInvitation.isPublic ? "success" : "info"}
+                showIcon
+                title={
+                  activeInvitation.isPublic
+                    ? "Link public đang hoạt động"
+                    : "Link này sẽ được dùng khi xuất bản"
+                }
+                description={
+                  <div className="space-y-2">
+                    <div className="break-all font-mono text-xs">
+                      {shareLink || previewPublicLink || "Hệ thống sẽ tự sinh slug nếu bạn để trống"}
+                    </div>
+                    <Text type="secondary" className="text-xs">
+                      Sau khi xuất bản, khách chỉ cần mở đúng đường dẫn này. Không cần token cho link public theo slug.
+                    </Text>
+                  </div>
+                }
+              />
 
               {missingRequiredVariables.length > 0 && (
                 <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">

@@ -1,8 +1,11 @@
-import { Controller, Get, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Put, Body, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { InvitationsService } from './invitations.service';
 import { FillVariablesDto } from './dto/fill-variables.dto';
 import { PublishInvitationDto } from './dto/publish-invitation.dto';
+import { CreateAdminInvitationDto } from './dto/create-admin-invitation.dto';
+import { UpdateInvitationCanvasDto } from './dto/update-invitation-canvas.dto';
+import { UpdateInvitationMetaDto } from './dto/update-invitation-meta.dto';
 import { CurrentTenant } from '../../common/decorators/current-tenant.decorator';
 import { Public } from '../../common/decorators/public.decorator';
 
@@ -28,10 +31,44 @@ export class InvitationsController {
   }
 
   @ApiBearerAuth()
+  @Post('invitations/admin')
+  @ApiOperation({
+    summary: 'Admin quickly creates a blank invitation or from a published template',
+  })
+  createAdmin(
+    @CurrentTenant() tenantId: string,
+    @Body() dto: CreateAdminInvitationDto,
+  ) {
+    return this.invitationsService.createAdmin(tenantId, dto);
+  }
+
+  @ApiBearerAuth()
   @Put('invitations/:id/variables')
   @ApiOperation({ summary: 'Fill / update invitation variables' })
   fillVariables(@Param('id') id: string, @Body() dto: FillVariablesDto) {
     return this.invitationsService.fillVariables(id, dto);
+  }
+
+  @ApiBearerAuth()
+  @Put('invitations/:id/meta')
+  @ApiOperation({ summary: 'Update invitation metadata such as slug' })
+  updateMeta(
+    @CurrentTenant() tenantId: string,
+    @Param('id') id: string,
+    @Body() dto: UpdateInvitationMetaDto,
+  ) {
+    return this.invitationsService.updateMeta(tenantId, id, dto);
+  }
+
+  @ApiBearerAuth()
+  @Put('invitations/:id/canvas')
+  @ApiOperation({ summary: 'Save invitation canvas data' })
+  updateCanvas(
+    @CurrentTenant() tenantId: string,
+    @Param('id') id: string,
+    @Body() dto: UpdateInvitationCanvasDto,
+  ) {
+    return this.invitationsService.updateCanvas(tenantId, id, dto);
   }
 
   @ApiBearerAuth()
