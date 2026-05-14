@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Detail - Aura Invitations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed-variant": "#444173",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e4fa",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-surface-variant": "#47464f",
+                        "primary": "#070235",
+                        "primary-container": "#1e1b4b",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#787680",
+                        "inverse-primary": "#c4c1fb",
+                        "on-secondary-container": "#57657a",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#c4c1fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-container": "#7c8a9f",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c8c5d0",
+                        "surface-tint": "#5b598c",
+                        "tertiary-container": "#142333",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#000c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-surface": "#191c1e",
+                        "primary-fixed": "#e3dfff",
+                        "on-primary-container": "#8683ba",
+                        "on-primary-fixed": "#181445",
+                        "surface-container": "#eceef0",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#0d1c2d"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "xl": "4rem",
+                        "margin": "2rem",
+                        "unit": "4px",
+                        "gutter": "1.5rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "sm": "1rem"
+                    },
+                    fontFamily: {
+                        "button": ["Inter"],
+                        "h1": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "display": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "button": ["15px", { lineHeight: "1", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "h1": ["36px", { lineHeight: "1.2", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "display": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "h2": ["28px", { lineHeight: "1.3", fontWeight: "500" }],
+                        "label-caps": ["12px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "h3": ["22px", { lineHeight: "1.4", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-white dark:bg-slate-900 text-indigo-900 dark:text-indigo-400 font-sans text-sm font-medium docked h-screen left-0 w-64 border-r border-r border-slate-200 dark:border-slate-800 flat no shadows flex flex-col h-full py-6 px-4 hidden md:flex shrink-0">
+<div class="mb-8">
+<h1 class="font-serif text-xl text-indigo-950 dark:text-white mb-1">Boutique Studio</h1>
+<p class="text-xs text-slate-500">Enterprise Tier</p>
+</div>
+<button class="w-full bg-primary text-on-primary py-3 rounded mb-8 font-button flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            Create New Event
+        </button>
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded bg-slate-100 dark:bg-slate-800 text-indigo-900 dark:text-white font-bold border-r-4 border-indigo-900 Active: scale-95 transition-transform hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                    Customers
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+                    Templates
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">insert_chart</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<ul class="flex flex-col gap-2 mt-auto pt-6 border-t border-slate-200">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Help Center
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded text-slate-500 hover:bg-slate-50 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow overflow-y-auto bg-surface-container-low px-6 py-8 md:px-12 md:py-12">
+<!-- Header Section -->
+<div class="max-w-[1200px] mx-auto mb-xl flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<a class="text-secondary font-body-sm flex items-center gap-1 mb-4 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                    Back to Orders
+                </a>
+<div class="flex items-center gap-4 mb-2">
+<h1 class="font-h1 text-h1 text-on-surface">Order #ORD-2024-892</h1>
+<span class="px-3 py-1 bg-green-100 text-green-800 text-xs font-semibold rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                        Fulfilled
+                    </span>
+</div>
+<p class="font-body-md text-on-surface-variant">Placed on October 24, 2024 at 10:45 AM</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded font-button shadow-sm border border-outline-variant hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+                    Refund
+                </button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded font-button shadow-sm hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                    Resend Email
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Left Column: Products & Payment (Span 2) -->
+<div class="lg:col-span-2 flex flex-col gap-gutter">
+<!-- Products Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high p-md">
+<h2 class="font-h3 text-h3 mb-6 border-b border-surface-container pb-4">Order Items</h2>
+<div class="flex flex-col gap-6">
+<!-- Item 1 -->
+<div class="flex items-start gap-4">
+<div class="w-24 h-32 bg-surface-container rounded-lg overflow-hidden shrink-0">
+<img alt="Elegant minimalist wedding invitation card laid on a textured neutral surface. Soft, natural lighting highlights the gold foil typography against the crisp white premium paper. The setting is modern and sophisticated." class="w-full h-full object-cover" data-alt="Elegant minimalist wedding invitation card laid on a textured neutral surface. Soft, natural lighting highlights the gold foil typography against the crisp white premium paper. The setting is modern and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyCobv6ctPnl_MACHzjAVEw6fvTTVshIt-VYgW29vgycPE4Exo4j9tTpm3QhcD5SmYaJQYKHv8Emgg3RKXaj3sSdwXeHQUin5rAoCdXCd_x2Gncqz1Y7qbphU2ZqpWWg_m0Zo6sq2XcovViC7m29Tw9JcDzzJlVdkxub_E0zxYPQT-Fwsdh81dOq-2gxwuVx9BlMPGw-plj6k-qkqtPjRyxey4F4_317nvAFOXNoWo_PUAr5_dgYqYW_M_KVYO5b-vlRujN975co89"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-[18px]">The Minimalist Suite</h3>
+<span class="font-body-lg font-medium">$450.00</span>
+</div>
+<p class="text-secondary font-body-sm mb-2">Variant: Gold Foil / Cotton Paper</p>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant">
+<span class="bg-surface-container-highest px-2 py-1 rounded">Qty: 100</span>
+<span>SKU: INV-MIN-GLD</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start gap-4">
+<div class="w-24 h-32 bg-surface-container rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-outline text-4xl">drafts</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-h3 text-[18px]">Digital RSVP Add-on</h3>
+<span class="font-body-lg font-medium">$50.00</span>
+</div>
+<p class="text-secondary font-body-sm mb-2">Service: Setup &amp; Hosting</p>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant">
+<span class="bg-surface-container-highest px-2 py-1 rounded">Qty: 1</span>
+<span>SKU: SRV-RSVP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment Timeline -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high p-md">
+<h2 class="font-h3 text-h3 mb-6 border-b border-surface-container pb-4">Payment History</h2>
+<div class="relative pl-4 border-l-2 border-surface-container-high ml-2 space-y-8">
+<div class="relative">
+<div class="absolute -left-[23px] bg-green-500 w-3 h-3 rounded-full border-2 border-white"></div>
+<p class="font-body-sm text-secondary mb-1">Oct 24, 2024 10:45 AM</p>
+<p class="font-body-md text-on-surface">Payment of <strong>$500.00</strong> processed successfully via Stripe (Visa ending in 4242).</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[23px] bg-primary w-3 h-3 rounded-full border-2 border-white"></div>
+<p class="font-body-sm text-secondary mb-1">Oct 24, 2024 10:40 AM</p>
+<p class="font-body-md text-on-surface">Order placed by customer.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Customer & Summary (Span 1) -->
+<div class="flex flex-col gap-gutter">
+<!-- Customer Info -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high p-md">
+<h2 class="font-h3 text-h3 mb-6 border-b border-surface-container pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">person</span>
+                        Customer Details
+                    </h2>
+<div class="space-y-4">
+<div>
+<p class="font-label-caps text-label-caps text-secondary mb-1">Name</p>
+<p class="font-body-md text-on-surface font-medium">Eleanor Vance</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-secondary mb-1">Contact</p>
+<a class="font-body-md text-primary hover:underline block" href="mailto:eleanor.v@example.com">eleanor.v@example.com</a>
+<p class="font-body-md text-on-surface">+1 (555) 019-2834</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-secondary mb-1">Shipping Address</p>
+<p class="font-body-md text-on-surface">
+                                1240 Rosewood Lane<br/>
+                                Apartment 4B<br/>
+                                Portland, OR 97204<br/>
+                                United States
+                            </p>
+</div>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high p-md">
+<h2 class="font-h3 text-h3 mb-6 border-b border-surface-container pb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">summarize</span>
+                        Summary
+                    </h2>
+<div class="space-y-3 font-body-md">
+<div class="flex justify-between">
+<span class="text-secondary">Subtotal</span>
+<span>$500.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary">Shipping (Standard)</span>
+<span>$15.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary">Tax (8%)</span>
+<span>$40.00</span>
+</div>
+<div class="pt-3 border-t border-surface-container flex justify-between font-h3 text-[20px] mt-2">
+<span>Total</span>
+<span>$555.00</span>
+</div>
+</div>
+</div>
+<!-- Action Card -->
+<div class="bg-primary-fixed rounded-xl shadow-sm border border-primary-fixed-dim p-md text-on-primary-fixed">
+<h3 class="font-h3 text-[18px] mb-2">Update Status</h3>
+<p class="font-body-sm opacity-80 mb-4">Manually override the current order status if needed.</p>
+<select class="w-full bg-white border border-outline-variant rounded p-2 font-body-sm text-on-surface mb-4">
+<option>Processing</option>
+<option>In Production</option>
+<option>Shipped</option>
+<option selected="">Fulfilled</option>
+<option>Cancelled</option>
+</select>
+<button class="w-full bg-primary text-on-primary py-2 rounded font-button shadow-sm hover:bg-primary-container transition-colors">
+                        Save Changes
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

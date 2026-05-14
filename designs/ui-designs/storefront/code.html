@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Invitations - Cửa hàng</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#444173",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e4fa",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-surface-variant": "#47464f",
+                        "primary": "#070235",
+                        "primary-container": "#1e1b4b",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#787680",
+                        "inverse-primary": "#c4c1fb",
+                        "on-secondary-container": "#57657a",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#c4c1fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-container": "#7c8a9f",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c8c5d0",
+                        "surface-tint": "#5b598c",
+                        "tertiary-container": "#142333",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#000c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-surface": "#191c1e",
+                        "primary-fixed": "#e3dfff",
+                        "on-primary-container": "#8683ba",
+                        "on-primary-fixed": "#181445",
+                        "surface-container": "#eceef0",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#0d1c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "margin": "2rem",
+                        "unit": "4px",
+                        "gutter": "1.5rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "sm": "1rem"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "h1": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "display": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h1": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h2": ["28px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["22px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none w-full">
+<div class="max-w-[1200px] mx-auto flex justify-between items-center px-6 py-4">
+<div class="font-serif text-2xl font-bold text-indigo-950 dark:text-slate-50 flex items-center gap-2">
+<span>Aura Invitations</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-indigo-900 dark:text-white border-b-2 border-indigo-900 pb-1 font-semibold hover:text-indigo-800 dark:hover:text-slate-200 transition-colors opacity-80 transition-opacity font-serif text-lg tracking-tight" href="#">Marketplace</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-800 dark:hover:text-slate-200 transition-colors font-serif text-lg tracking-tight" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-800 dark:hover:text-slate-200 transition-colors font-serif text-lg tracking-tight" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-indigo-950 dark:text-slate-50 hover:text-indigo-800 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-indigo-950 dark:text-slate-50 hover:text-indigo-800 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<div class="hidden md:flex items-center gap-4 ml-4 pl-4 border-l border-slate-200">
+<button class="font-button text-button text-primary hover:text-primary-container transition-colors">Sign In</button>
+<button class="font-button text-button bg-primary text-on-primary px-4 py-2 rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm">Cart</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Banner -->
+<section class="relative bg-surface-container-low overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Hero background" class="w-full h-full object-cover opacity-20" data-alt="A luxurious, minimalist table setting with fine stationery, soft natural lighting casting gentle shadows, creating an elegant and sophisticated atmosphere. The color palette features creamy whites, subtle golds, and deep slate accents, reflecting a premium boutique aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaRBaVEy68Kklolb1yjIM-TiRgYe0MilTYbk4lt8gYgUjbsH_qSnifpUsIYM2auRVjEq6r23jl9seUUslwv_BYlgG8NdwWauwJrjXRHmciigXW1zzojc4OAVMNUQf3gTq9J3dBJNfXVuqVP_G4e7KN4-HF2-vW-cjBk3isE63vD_rtPG62KZQJqCFulPtDvnrX4V1vrlTIx-lxx3NSc_YkChSliztsCQPENbDnbgghLNLBQtl0UWM75fbqkw4pQEKiI9LTO-MoG7yk"/>
+</div>
+<div class="max-w-[1200px] mx-auto px-6 py-24 relative z-10 flex flex-col items-center text-center">
+<h1 class="font-display text-display text-primary mb-6 max-w-3xl">Thiết kế thiệp cưới độc bản cho ngày trọng đại</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl">Khám phá bộ sưu tập thiệp cưới tinh tế, mang đậm dấu ấn cá nhân. Chất liệu cao cấp, thiết kế hiện đại.</p>
+<button class="font-button text-button bg-primary text-on-primary px-8 py-3 rounded-DEFAULT hover:bg-primary-container transition-colors shadow-md">Khám phá ngay</button>
+</div>
+</section>
+<!-- Main Store Section -->
+<section class="max-w-[1200px] mx-auto px-6 py-xl flex flex-col md:flex-row gap-gutter">
+<!-- Sidebar Filters -->
+<aside class="w-full md:w-64 flex-shrink-0 mb-8 md:mb-0">
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-6 shadow-sm sticky top-24">
+<h2 class="font-h3 text-h3 text-primary mb-6 border-b border-outline-variant pb-2">Bộ lọc</h2>
+<div class="mb-6">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">Danh mục</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Thiệp Cưới</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Thiệp Mời Sự Kiện</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Save the Date</span>
+</label>
+</div>
+</div>
+<div class="mb-6">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">Phong cách</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Minimalist</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Classic Elegance</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Modern Botanical</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 uppercase tracking-wider">Khoảng giá</h3>
+<div class="flex items-center gap-2">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-2 py-1 font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Min" type="text"/>
+<span class="text-on-surface-variant">-</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-2 py-1 font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Max" type="text"/>
+</div>
+</div>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-grow">
+<div class="flex justify-between items-center mb-6">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Hiển thị 12 sản phẩm</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-3 py-2 font-body-sm text-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none cursor-pointer">
+<option>Bán chạy nhất</option>
+<option>Giá: Thấp đến Cao</option>
+<option>Giá: Cao đến Thấp</option>
+<option>Mới nhất</option>
+</select>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Product Card 1 -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden group hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-container-low">
+<img alt="Product 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up shot of a minimalist wedding invitation card with elegant gold foil typography on thick, textured cotton paper. The card rests on a dark slate background, bathed in soft, directional light that highlights the paper's grain and the foil's subtle gleam." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqInQrJ-xuq4hD0Z7R_qniQ5GzbRDdlGJ2E8WtPHAci2tqY7Lrz32O242i8kjwxSpVg3TKF74IZoS_tVUXGv0y5fdXM7n7RtLvLKnGm-x6rvOFAhXS2wJWlMY14l2fSYIPIQ5ZlL8lm9MeGOxsVd2Ua8S53BIG34_i-jELRL9teyImRcN2Qx8xV2GZDQgmY7ybLwKGwMyh0B7pXAxqRkdS1aqzBHBfwAqaEOsjW1ucDh5qjET9a8FckQwX7sGpSDjJ3Jjgq_Ip0-R9"/>
+<button class="absolute top-3 right-3 bg-white/80 p-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">4.9</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(120)</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-1">Ethereal Romance</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 flex-grow">Thiệp cưới dập nổi tinh tế</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-body-md text-body-md font-semibold text-primary">25.000₫ / thiệp</span>
+<button class="text-primary hover:text-primary-container bg-surface-container rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden group hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-container-low">
+<img alt="Product 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An elegant, modern botanical wedding invitation suite laid out symmetrically on a light, marble surface. The design features soft watercolor greenery and classic serif typography. Crisp, bright, even lighting emphasizes the clean, sophisticated, high-end stationery aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMxl8Ue-RmL0vrQAfoUQOfYhwYzcEzP2MI7UT3TYVA_CinKJeR1A7S4eB6vjmdrIFOdpkNxo1A4sltWCmL6RujtSCfgPyJ7aDBzQjvT9jgfUNN3cXFpaCNGv95wbqaln_wX0t713Y58slMIlhbU0RQVsGARu1dJ9igUMqDJ4vTjNPmrlPKwCtEkXRcYX8B-BSu69p0x19tkJi6OePDaySzmV7J5kS27PChrhighxONyCXtePcDrsvj5b7Psi2T-AliH2AQSepVqvDi"/>
+<div class="absolute top-3 left-3 bg-primary text-on-primary font-label-caps text-label-caps px-2 py-1 rounded-sm">MỚI</div>
+<button class="absolute top-3 right-3 bg-white/80 p-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">5.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(45)</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-1">Verdant Whisper</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 flex-grow">Thiệp in họa tiết lá cây hiện đại</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-body-md text-body-md font-semibold text-primary">18.000₫ / thiệp</span>
+<button class="text-primary hover:text-primary-container bg-surface-container rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden group hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-container-low">
+<img alt="Product 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A sleek, dark-themed event invitation card featuring minimalist geometric silver foil lines on deep indigo matte paper. The lighting is moody and dramatic, casting sharp shadows that enhance the modern, luxurious, and authoritative brand personality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY6HkfBNwD2FIoMkN_F88onXAOiwEDOVuUWx-v-LStsQT8tlwt71VLwt9GO-HLXWlxUy53iyL7D3-2_cu8aDFLEMZa8kdOzDpXcvASpTb9sWVC-KYEu-kyXOSSvwrhS8mq8lcH2uTZOZKlLErN1QF1CPf5wZjVmAua-euhTmO6iAWfjjvdfu2O2WXwBD4GfTp2_DVxaCfrPGyRsU-uADO3AlOosI4j0fSDZc_i-tELxD0CmSViqw4In3GIGU1_sJZ4c1DIJ_0oxPJb"/>
+<button class="absolute top-3 right-3 bg-white/80 p-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">4.8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(89)</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-1">Midnight Velvet</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 flex-grow">Thiệp ép kim bạc sang trọng</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-body-md text-body-md font-semibold text-primary">32.000₫ / thiệp</span>
+<button class="text-primary hover:text-primary-container bg-surface-container rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden group hover:shadow-lg transition-shadow duration-300 flex flex-col">
+<div class="relative aspect-[4/5] overflow-hidden bg-surface-container-low">
+<img alt="Product 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully crafted classic wedding invitation featuring intricate blind letterpress detailing and a soft cream silk ribbon tie. The setting is bright and airy, with soft morning light illuminating the fine textures of the premium paper stock." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALiM0GlZyZkHWf9qN0lGM2-O3V44D-UPeyHaFHIR5LKyqdJtrgunym8Ax3wM72BYLBYC7e4LYBkKMG4UcWyGCJhdEMx6XUFvI-ogVOdNyF0DZ2lNXwuCpqZmBkUcRk-AnX_7IKDjo7BP76Z6c1NSlmFJSqtcDJoBryx0p2r0V8QJaxQ_YhcJFIkh2uNDAZ6Hutsq4JYvB4c0akXNXPvwA0lz6CUm-T17w4eMPtuDwJyFRYY3cN9XvqaOBH_gbvThIqpPzyeOrVW2FI"/>
+<button class="absolute top-3 right-3 bg-white/80 p-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">4.7</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">(210)</span>
+</div>
+<h3 class="font-h3 text-h3 text-primary mb-1">Classic Ivory</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 flex-grow">Phong cách truyền thống, thắt nơ lụa</p>
+<div class="flex justify-between items-center mt-auto">
+<span class="font-body-md text-body-md font-semibold text-primary">22.000₫ / thiệp</span>
+<button class="text-primary hover:text-primary-container bg-surface-container rounded-full p-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-2">
+<button class="p-2 border border-outline-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary rounded-DEFAULT font-body-sm text-body-sm font-medium">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant text-on-surface rounded-DEFAULT hover:bg-surface-container transition-colors font-body-sm text-body-sm font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant text-on-surface rounded-DEFAULT hover:bg-surface-container transition-colors font-body-sm text-body-sm font-medium">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="p-2 border border-outline-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 w-full mt-auto">
+<div class="max-w-[1200px] mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-center md:text-left">
+<span class="font-serif text-lg text-indigo-900 dark:text-indigo-400 block mb-2">Aura Invitations</span>
+<span class="font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">© 2024 Aura Invitations SaaS. All rights reserved.</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-6">
+<a class="font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline transition-colors" href="#">Privacy Policy</a>
+<a class="font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline transition-colors" href="#">Terms of Service</a>
+<a class="font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline transition-colors" href="#">Contact</a>
+<a class="font-sans text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-indigo-700 dark:hover:text-indigo-300 underline transition-colors" href="#">Artist Program</a>
+</nav>
+</div>
+</footer>
+</body></html>

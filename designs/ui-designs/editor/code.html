@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Invitations - Canvas Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#444173",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#d4e4fa",
+                      "secondary-fixed": "#d5e3fc",
+                      "on-tertiary-fixed-variant": "#39485a",
+                      "on-surface-variant": "#47464f",
+                      "primary": "#070235",
+                      "primary-container": "#1e1b4b",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-fixed-dim": "#b9c8de",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#787680",
+                      "inverse-primary": "#c4c1fb",
+                      "on-secondary-container": "#57657a",
+                      "on-error-container": "#93000a",
+                      "surface": "#f7f9fb",
+                      "background": "#f7f9fb",
+                      "secondary": "#515f74",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#e0e3e5",
+                      "primary-fixed-dim": "#c4c1fb",
+                      "inverse-on-surface": "#eff1f3",
+                      "on-secondary-fixed-variant": "#3a485b",
+                      "secondary-container": "#d5e3fc",
+                      "surface-dim": "#d8dadc",
+                      "surface-bright": "#f7f9fb",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#e6e8ea",
+                      "on-tertiary-container": "#7c8a9f",
+                      "surface-container-highest": "#e0e3e5",
+                      "outline-variant": "#c8c5d0",
+                      "surface-tint": "#5b598c",
+                      "tertiary-container": "#142333",
+                      "surface-container-low": "#f2f4f6",
+                      "tertiary": "#000c1c",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "on-surface": "#191c1e",
+                      "primary-fixed": "#e3dfff",
+                      "on-primary-container": "#8683ba",
+                      "on-primary-fixed": "#181445",
+                      "surface-container": "#eceef0",
+                      "on-background": "#191c1e",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#0d1c2d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "4rem",
+                      "margin": "2rem",
+                      "unit": "4px",
+                      "gutter": "1.5rem",
+                      "lg": "2.5rem",
+                      "xs": "0.5rem",
+                      "md": "1.5rem",
+                      "sm": "1rem"
+              },
+              "fontFamily": {
+                      "button": [
+                              "Inter"
+                      ],
+                      "h1": [
+                              "Noto Serif"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Noto Serif"
+                      ],
+                      "h2": [
+                              "Noto Serif"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "h3": [
+                              "Noto Serif"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "button": [
+                              "15px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "h1": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h2": [
+                              "28px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h3": [
+                              "22px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for panels */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e0e3e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #787680;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen overflow-hidden flex flex-col antialiased">
+<!-- Top Tool Bar -->
+<header class="h-[64px] shrink-0 bg-surface-container-lowest border-b border-surface-variant flex items-center justify-between px-md shadow-sm z-20">
+<!-- Brand & Document Info -->
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex items-center gap-xs">
+<span class="font-h3 text-h3 text-primary">Aura Invitations</span>
+<span class="text-outline mx-xs">/</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface font-medium p-0 w-48 truncate placeholder-outline-variant" placeholder="Untitled Design" type="text" value="Summer Gala Invitation"/>
+</div>
+</div>
+<!-- Center Actions (Undo/Redo/Zoom) -->
+<div class="flex items-center gap-xs bg-surface-container-low p-1 rounded-xl">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant" title="Undo">
+<span class="material-symbols-outlined text-[20px]">undo</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant opacity-50 cursor-not-allowed" title="Redo">
+<span class="material-symbols-outlined text-[20px]">redo</span>
+</button>
+<div class="w-px h-4 bg-outline-variant mx-1"></div>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant" title="Zoom Out">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<span class="font-label-caps text-label-caps text-on-surface-variant w-12 text-center">85%</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant" title="Zoom In">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs mr-sm">
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">cloud_done</span> Saved
+                </span>
+</div>
+<button class="h-10 px-md rounded-full border border-outline hover:bg-surface-container transition-colors font-button text-button text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">share</span> Share
+            </button>
+<button class="h-10 px-md rounded-full bg-primary hover:bg-primary-container transition-colors font-button text-button text-on-primary shadow-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+            </button>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Sidebar (Layers/Assets) -->
+<aside class="w-[280px] shrink-0 bg-surface-container-lowest border-r border-surface-variant flex flex-col z-10 shadow-[2px_0_8px_rgba(30,27,75,0.02)]">
+<!-- Tabs -->
+<div class="flex border-b border-surface-variant">
+<button class="flex-1 py-3 font-button text-button text-primary border-b-2 border-primary bg-surface-container-low transition-colors">
+                    Elements
+                </button>
+<button class="flex-1 py-3 font-button text-button text-on-surface-variant border-b-2 border-transparent hover:bg-surface-container transition-colors">
+                    Layers
+                </button>
+</div>
+<!-- Panel Content -->
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-surface-container-low border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary transition-all font-body-sm text-body-sm placeholder-outline" placeholder="Search templates, icons..." type="text"/>
+</div>
+<!-- Text Categories -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-widest">Typography</h3>
+<div class="grid gap-xs">
+<button class="flex flex-col items-center justify-center h-20 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-colors group">
+<span class="font-h2 text-h2 text-on-surface group-hover:text-primary transition-colors">Heading</span>
+</button>
+<button class="flex flex-col items-center justify-center h-16 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-colors group">
+<span class="font-body-lg text-body-lg text-on-surface font-medium group-hover:text-primary transition-colors">Subheading</span>
+</button>
+<button class="flex flex-col items-center justify-center h-12 bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant transition-colors group">
+<span class="font-body-sm text-body-sm text-on-surface group-hover:text-primary transition-colors">Body text</span>
+</button>
+</div>
+</div>
+<!-- Shapes & Graphics -->
+<div>
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Shapes &amp; Assets</h3>
+<button class="font-body-sm text-body-sm text-primary hover:underline">See all</button>
+</div>
+<div class="grid grid-cols-3 gap-xs">
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<div class="w-8 h-8 border-2 border-on-surface"></div>
+</button>
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<div class="w-8 h-8 border-2 border-on-surface rounded-full"></div>
+</button>
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[32px] text-on-surface">favorite</span>
+</button>
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[32px] text-on-surface">star</span>
+</button>
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[32px] text-on-surface">format_quote</span>
+</button>
+<button class="aspect-square bg-surface-container-low rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[32px] text-on-surface">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Backgrounds -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-widest">Background</h3>
+<div class="grid grid-cols-2 gap-xs">
+<button class="aspect-video bg-[#FAF9F6] rounded-lg border border-outline-variant flex items-center justify-center relative overflow-hidden ring-2 ring-primary ring-offset-1">
+<span class="absolute inset-0 bg-gradient-to-br from-transparent to-black/5"></span>
+</button>
+<button class="aspect-video bg-[#E8EAE6] rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center relative overflow-hidden">
+<span class="absolute inset-0 bg-gradient-to-br from-transparent to-black/5"></span>
+</button>
+<button class="aspect-video bg-[#F5E6E8] rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center relative overflow-hidden">
+<span class="absolute inset-0 bg-gradient-to-br from-transparent to-black/5"></span>
+</button>
+<button class="aspect-video bg-[#E6EEF5] rounded-lg border border-transparent hover:border-outline-variant flex items-center justify-center relative overflow-hidden">
+<span class="absolute inset-0 bg-gradient-to-br from-transparent to-black/5"></span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Canvas Area (Center) -->
+<section class="flex-1 bg-surface-container relative overflow-hidden flex items-center justify-center group cursor-grab active:cursor-grabbing">
+<!-- Canvas Grid Pattern (Subtle) -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 1px 1px, #1e1b4b 1px, transparent 0); background-size: 20px 20px;"></div>
+<!-- The Card Document -->
+<div class="relative bg-white shadow-[0_20px_40px_rgba(30,27,75,0.08)] w-[500px] aspect-[5/7] transition-transform duration-200" style="transform: scale(0.85);">
+<!-- Bleed Guides (visible on hover/active) -->
+<div class="absolute inset-0 border border-transparent group-hover:border-primary/20 pointer-events-none z-50 transition-colors"></div>
+<div class="absolute inset-[-12px] border border-dashed border-transparent group-hover:border-outline/30 pointer-events-none z-50 transition-colors"></div>
+<!-- Card Content (Simulated) -->
+<div class="absolute inset-0 bg-[#FAF9F6] overflow-hidden flex flex-col items-center py-xl px-lg">
+<!-- Decorative Border -->
+<div class="absolute inset-4 border border-[#D5C5A8] opacity-50 pointer-events-none"></div>
+<div class="mt-xl text-center space-y-md relative z-10 w-full">
+<!-- Selected Element bounding box -->
+<div class="relative inline-block cursor-pointer group/elem ring-2 ring-primary ring-offset-2 rounded-sm p-2">
+<span class="font-h1 text-h1 text-primary block leading-tight">Gala</span>
+<span class="font-h1 text-h1 text-primary block leading-tight">Dinner</span>
+<!-- Selection Handles -->
+<div class="absolute -top-1 -left-1 w-2 h-2 bg-white border border-primary rounded-full"></div>
+<div class="absolute -top-1 -right-1 w-2 h-2 bg-white border border-primary rounded-full"></div>
+<div class="absolute -bottom-1 -left-1 w-2 h-2 bg-white border border-primary rounded-full"></div>
+<div class="absolute -bottom-1 -right-1 w-2 h-2 bg-white border border-primary rounded-full"></div>
+<!-- Context Actions (floating above selected element) -->
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-surface-container-lowest shadow-md rounded-lg flex items-center p-1 border border-surface-variant gap-1 opacity-100 transition-opacity">
+<button class="w-6 h-6 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">content_copy</span></button>
+<button class="w-6 h-6 flex items-center justify-center rounded hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined text-[14px]">delete</span></button>
+</div>
+</div>
+<div class="mt-lg relative cursor-pointer hover:ring-1 hover:ring-outline/50 rounded-sm p-2 transition-all">
+<p class="font-body-md text-body-md text-on-surface-variant tracking-widest uppercase">Join us for an evening of</p>
+<p class="font-body-md text-body-md text-on-surface-variant tracking-widest uppercase mt-1">Elegance and Celebration</p>
+</div>
+<div class="mt-xl relative cursor-pointer hover:ring-1 hover:ring-outline/50 rounded-sm p-2 transition-all">
+<p class="font-h3 text-h3 text-primary">Saturday, August 15th</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">At Seven o'clock in the evening</p>
+</div>
+</div>
+<!-- Decorative Graphic -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 w-32 h-32 opacity-20 cursor-pointer hover:ring-1 hover:ring-outline/50 rounded-full p-2 transition-all">
+<div class="w-full h-full bg-gradient-to-tr from-[#D5C5A8] to-transparent rounded-full mix-blend-multiply"></div>
+</div>
+</div>
+</div>
+<!-- Canvas Controls (Bottom Floating) -->
+<div class="absolute bottom-lg left-1/2 -translate-x-1/2 bg-surface-container-lowest shadow-[0_4px_12px_rgba(30,27,75,0.08)] border border-surface-variant rounded-full px-md py-2 flex items-center gap-md z-20">
+<button class="text-on-surface-variant hover:text-primary font-body-sm text-body-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[18px]">layers</span> Page 1 of 2
+                </button>
+<div class="w-px h-4 bg-outline-variant"></div>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Grid View">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Fit to Screen">
+<span class="material-symbols-outlined text-[20px]">fit_screen</span>
+</button>
+</div>
+</section>
+<!-- Right Sidebar (Properties/Inspector) -->
+<aside class="w-[320px] shrink-0 bg-surface-container-lowest border-l border-surface-variant flex flex-col z-10 shadow-[-2px_0_8px_rgba(30,27,75,0.02)]">
+<!-- Contextual Header -->
+<div class="p-md border-b border-surface-variant flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-fixed-dim flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">title</span>
+</div>
+<div>
+<h2 class="font-body-sm text-body-sm font-semibold text-on-surface">Text Properties</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Editing Heading</p>
+</div>
+</div>
+<!-- Properties Content -->
+<div class="flex-1 overflow-y-auto p-md space-y-lg">
+<!-- Font Selection & Style -->
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Font Family</label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low border border-surface-variant focus:border-primary focus:ring-1 focus:ring-primary appearance-none font-h3 text-body-md text-on-surface cursor-pointer">
+<option>Noto Serif</option>
+<option>Inter</option>
+<option>Playfair Display</option>
+<option>Cormorant Garamond</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Font Weight & Size -->
+<div class="flex gap-sm">
+<div class="flex-1 space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Weight</label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low border border-surface-variant focus:border-primary focus:ring-1 focus:ring-primary appearance-none font-body-sm text-body-sm text-on-surface cursor-pointer">
+<option>Regular</option>
+<option>Medium</option>
+<option selected="">Semibold</option>
+<option>Bold</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<div class="w-24 space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Size</label>
+<div class="relative flex items-center bg-surface-container-low border border-surface-variant rounded-lg focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+<input class="w-full h-10 bg-transparent border-none focus:ring-0 text-center font-body-sm text-body-sm text-on-surface p-0" type="number" value="48"/>
+</div>
+</div>
+</div>
+<!-- Alignment & Formatting -->
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Alignment &amp; Style</label>
+<div class="flex bg-surface-container-low rounded-lg border border-surface-variant p-1">
+<button class="flex-1 h-8 rounded flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_align_left</span></button>
+<button class="flex-1 h-8 rounded bg-surface-container-lowest shadow-sm flex items-center justify-center text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">format_align_center</span></button>
+<button class="flex-1 h-8 rounded flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_align_right</span></button>
+<div class="w-px h-6 bg-outline-variant mx-1 my-auto"></div>
+<button class="flex-1 h-8 rounded flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="flex-1 h-8 rounded flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="flex-1 h-8 rounded flex items-center justify-center hover:bg-surface-container text-on-surface-variant transition-colors"><span class="material-symbols-outlined text-[18px]">format_underlined</span></button>
+</div>
+</div>
+<!-- Color -->
+<div class="space-y-sm">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant block">Fill Color</label>
+<span class="font-body-sm text-body-sm text-outline font-mono text-[11px]">#070235</span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-lg border-2 border-primary ring-2 ring-transparent focus:ring-primary/30 flex items-center justify-center bg-primary transition-all">
+<span class="material-symbols-outlined text-white text-[16px] icon-fill">colorize</span>
+</button>
+<div class="flex-1 flex gap-2">
+<button class="w-8 h-8 rounded-full border border-surface-variant bg-[#070235] ring-2 ring-offset-1 ring-primary"></button>
+<button class="w-8 h-8 rounded-full border border-surface-variant bg-[#191c1e] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full border border-surface-variant bg-[#515f74] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full border border-surface-variant bg-[#787680] hover:scale-110 transition-transform"></button>
+<button class="w-8 h-8 rounded-full border border-surface-variant bg-[#D5C5A8] hover:scale-110 transition-transform"></button>
+</div>
+</div>
+</div>
+<!-- Spacing -->
+<div class="space-y-md">
+<label class="font-label-caps text-label-caps text-on-surface-variant block border-b border-surface-variant pb-2">Spacing</label>
+<div class="space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-outline">format_line_spacing</span> Line Height</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant w-8 text-right">1.2</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="2.5" min="0.5" step="0.1" type="range" value="1.2"/>
+</div>
+<div class="space-y-xs">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-outline">format_letter_spacing</span> Letter Spacing</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant w-8 text-right">0</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-primary" max="50" min="-10" step="1" type="range" value="0"/>
+</div>
+</div>
+<!-- Effects Toggle -->
+<div class="pt-sm border-t border-surface-variant">
+<button class="w-full flex items-center justify-between py-2 hover:bg-surface-container rounded-lg transition-colors group">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface group-hover:text-primary transition-colors">Effects</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[20px]">add</span>
+</button>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

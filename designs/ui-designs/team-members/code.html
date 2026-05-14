@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aura Invitations - Quản lý Thành viên</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#444173",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e4fa",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-surface-variant": "#47464f",
+                        "primary": "#070235",
+                        "primary-container": "#1e1b4b",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#787680",
+                        "inverse-primary": "#c4c1fb",
+                        "on-secondary-container": "#57657a",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#c4c1fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-container": "#7c8a9f",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c8c5d0",
+                        "surface-tint": "#5b598c",
+                        "tertiary-container": "#142333",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#000c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-surface": "#191c1e",
+                        "primary-fixed": "#e3dfff",
+                        "on-primary-container": "#8683ba",
+                        "on-primary-fixed": "#181445",
+                        "surface-container": "#eceef0",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#0d1c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "margin": "2rem",
+                        "unit": "4px",
+                        "gutter": "1.5rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "sm": "1rem"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "h1": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "display": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h1": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h2": ["28px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["22px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-white dark:bg-slate-900 text-indigo-900 dark:text-indigo-400 font-sans text-sm font-medium docked h-screen left-0 w-64 border-r border-r border-slate-200 dark:border-slate-800 flat no shadows flex flex-col h-full py-6 px-4 flex-shrink-0 hidden md:flex">
+<div class="mb-8 px-4 flex items-center gap-3">
+<img alt="Tenant Logo" class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A refined, minimalist logo placeholder representing a high-end boutique studio. The image features a stylized geometric monogram in deep indigo against a clean, brilliant white background. Soft, studio-quality lighting creates a subtle, premium drop shadow, evoking the sophisticated, corporate yet elegant aesthetic of a high-performance stationery business." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwxfAcgSPWtZw8ePO9Q-JA17W7-WyCxdrn1PC6fpm1qdtsiATcvFv-n8aMz-NO_TxyDGe3L1JXJDqPVkcfrMycuSNY1nqKM6_t7Frt6ViJzaq6gKKt6IN9kGDTIKXzf7cyK9xvBTnMHBnpMRYcROhdB6l78Ny_Y-pXZ5_04awq04I8V0WD_I7pNehKyPUL530LZSP3gHEa7npK0fZnhfAnmrPFThdElLe29qW3dC2iajTD99_q5AAwB1jr5rPnJDb2DzyanjL2Nh4x"/>
+<div>
+<h2 class="font-serif text-xl text-indigo-950 dark:text-white font-bold tracking-tight">Boutique Studio</h2>
+<span class="text-xs text-slate-500 font-medium">Enterprise Tier</span>
+</div>
+</div>
+<button class="mb-8 w-full bg-primary text-on-primary font-button text-button py-3 px-4 rounded-lg hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">add</span>
+            Create New Event
+        </button>
+<ul class="flex flex-col gap-1 flex-grow">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                    Customers
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">auto_awesome_motion</span>
+                    Templates
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">insert_chart</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-slate-100 dark:bg-slate-800 text-indigo-900 dark:text-white font-bold border-r-4 border-indigo-900 Active: scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto border-t border-slate-200 pt-4">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+                        Help Center
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+                        Log Out
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow overflow-y-auto bg-surface flex flex-col">
+<!-- TopAppBar (Mobile Only - Simplified) -->
+<header class="md:hidden bg-white px-4 py-3 border-b border-surface-variant flex items-center justify-between sticky top-0 z-40">
+<h1 class="font-h2 text-h2 text-primary font-bold">Boutique Studio</h1>
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="flex-grow p-gutter md:p-xl max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-4">
+<div>
+<h1 class="font-h1 text-h1 text-on-surface mb-2">Team Members</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage organization members, roles, and access permissions.</p>
+</div>
+<button class="bg-primary text-on-primary font-button text-button px-6 py-3 rounded-DEFAULT hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2 flex-shrink-0">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person_add</span>
+                    Mời thành viên mới
+                </button>
+</div>
+<!-- Main Content Canvas - Settings Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-gutter">
+<!-- Settings Nav (In-page) -->
+<aside class="lg:col-span-1">
+<nav class="flex flex-col gap-1">
+<a class="px-4 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm font-medium" href="#">General</a>
+<a class="px-4 py-2 rounded-DEFAULT bg-surface-container-high text-on-surface font-body-sm text-body-sm font-semibold border-l-2 border-primary" href="#">Team Members</a>
+<a class="px-4 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm font-medium" href="#">Billing &amp; Plans</a>
+<a class="px-4 py-2 rounded-DEFAULT text-on-surface-variant hover:bg-surface-variant transition-colors font-body-sm text-body-sm font-medium" href="#">Integrations</a>
+</nav>
+</aside>
+<!-- Data Table Section -->
+<div class="lg:col-span-3">
+<div class="bg-surface-container-lowest rounded-lg border border-surface-variant shadow-[0_2px_4px_rgba(30,27,75,0.04)] overflow-hidden">
+<!-- Toolbar -->
+<div class="p-md border-b border-surface-variant flex flex-col sm:flex-row justify-between items-center gap-4 bg-white">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background border border-surface-variant rounded-DEFAULT font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-outline-variant" placeholder="Search members..." type="text"/>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="p-2 border border-surface-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+<button class="p-2 border border-surface-variant rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-variant">
+<th class="py-3 px-md font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">Tên &amp; Email</th>
+<th class="py-3 px-md font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">Vai trò</th>
+<th class="py-3 px-md font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap">Trạng thái</th>
+<th class="py-3 px-md font-label-caps text-label-caps text-on-surface-variant whitespace-nowrap text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y divide-surface-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-md">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A professional headshot of a young woman in a brightly lit studio. She has a warm, confident expression, soft natural makeup, and is wearing a crisp white blouse. The lighting is high-key and flattering, suitable for a premium corporate dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY_2PDWe-h7iwRtB4Sev_jL7rqXXTSpvsPs9QQW0fdqjXEWDnD64NlYTCquNoCllpBx61hS-WUg8T5_mVEOTRFyAmRTEdjBqR5J872W49qYwxJvyO4l7BTHp6_tlY3k_DtcXS16u-D3FhumKw_PyiVue7OZttBlvrOKtQYpJK8Tr3cTLoOhTlvG5NdipaBvziILPksaalapNC6aggXQkDPAJZAGVukY8VLylgA6ge5iM79SspKOCe9l-uxkwQM4xLT5lmxUZrDMSgr"/>
+<div>
+<p class="font-medium text-on-surface">Elena Rodriguez</p>
+<p class="text-on-surface-variant text-xs mt-0.5">elena.r@boutiquestudio.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-DEFAULT bg-primary-container/10 text-primary-container font-medium text-xs">Admin</span>
+</td>
+<td class="py-4 px-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-on-surface-variant">Hoạt động</span>
+</div>
+</td>
+<td class="py-4 px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-medium shadow-sm">
+                                                    MS
+                                                </div>
+<div>
+<p class="font-medium text-on-surface">Marcus Sterling</p>
+<p class="text-on-surface-variant text-xs mt-0.5">marcus@boutiquestudio.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-md">
+<span class="text-on-surface-variant">Editor</span>
+</td>
+<td class="py-4 px-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-on-surface-variant">Hoạt động</span>
+</div>
+</td>
+<td class="py-4 px-md text-right">
+<button class="text-outline hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Pending) -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-dashed border-outline-variant flex items-center justify-center text-outline shadow-sm">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<div>
+<p class="font-medium text-on-surface italic text-outline">Chưa có tên</p>
+<p class="text-on-surface-variant text-xs mt-0.5">sarah.chen@boutiquestudio.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-md">
+<span class="text-on-surface-variant">Viewer</span>
+</td>
+<td class="py-4 px-md">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span class="text-on-surface-variant">Chờ xác nhận</span>
+</div>
+</td>
+<td class="py-4 px-md text-right">
+<button class="text-outline hover:text-primary transition-colors font-medium text-xs underline underline-offset-2 opacity-0 group-hover:opacity-100 focus:opacity-100">
+                                                Resend
+                                            </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Footer -->
+<div class="p-md border-t border-surface-variant bg-white flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 3 of 3 members</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kết quả thanh toán - Aura Invitations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Noto+Serif:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#444173",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#d4e4fa",
+                        "secondary-fixed": "#d5e3fc",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "on-surface-variant": "#47464f",
+                        "primary": "#070235",
+                        "primary-container": "#1e1b4b",
+                        "inverse-surface": "#2d3133",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#787680",
+                        "inverse-primary": "#c4c1fb",
+                        "on-secondary-container": "#57657a",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "primary-fixed-dim": "#c4c1fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "on-tertiary-container": "#7c8a9f",
+                        "surface-container-highest": "#e0e3e5",
+                        "outline-variant": "#c8c5d0",
+                        "surface-tint": "#5b598c",
+                        "tertiary-container": "#142333",
+                        "surface-container-low": "#f2f4f6",
+                        "tertiary": "#000c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "on-surface": "#191c1e",
+                        "primary-fixed": "#e3dfff",
+                        "on-primary-container": "#8683ba",
+                        "on-primary-fixed": "#181445",
+                        "surface-container": "#eceef0",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#0d1c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "margin": "2rem",
+                        "unit": "4px",
+                        "gutter": "1.5rem",
+                        "lg": "2.5rem",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "sm": "1rem"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "h1": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "display": ["Noto Serif"],
+                        "h2": ["Noto Serif"],
+                        "label-caps": ["Inter"],
+                        "h3": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["15px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "h1": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "h2": ["28px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "h3": ["22px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-white/90 dark:bg-slate-950/90 backdrop-blur-md docked full-width top-0 z-50 border-b border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none sticky">
+<div class="max-w-[1200px] mx-auto flex justify-between items-center px-6 py-4">
+<a class="font-serif text-2xl font-bold text-indigo-950 dark:text-slate-50" href="#">
+                Aura Invitations
+            </a>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-800 dark:hover:text-slate-200 transition-colors font-body-md text-body-md" href="#">Marketplace</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-800 dark:hover:text-slate-200 transition-colors font-body-md text-body-md" href="#">Collections</a>
+<a class="text-slate-600 dark:text-slate-400 font-medium hover:text-indigo-800 dark:hover:text-slate-200 transition-colors font-body-md text-body-md" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-button text-button text-indigo-950 dark:text-slate-50 hover:text-indigo-800 transition-colors">Sign In</button>
+<button class="font-button text-button text-indigo-950 dark:text-slate-50 hover:text-indigo-800 transition-colors">Cart</button>
+<div class="flex gap-2 text-indigo-950 dark:text-slate-50">
+<span class="material-symbols-outlined cursor-pointer hover:text-indigo-800 transition-colors" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-indigo-800 transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-[1200px] mx-auto px-6 py-xl flex flex-col items-center">
+<!-- Payment Result Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_10px_25px_rgba(30,27,75,0.08)] border border-surface-variant w-full max-w-2xl p-xl flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="w-20 h-20 bg-tertiary-fixed rounded-full flex items-center justify-center mb-md shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<h1 class="font-h1 text-h1 text-primary mb-xs">Thanh toán thành công!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">Cảm ơn bạn đã lựa chọn Aura Invitations. Đơn hàng của bạn đã được xác nhận.</p>
+<!-- Order Details -->
+<div class="w-full bg-surface-container-low rounded-lg p-md mb-xl flex flex-col gap-sm text-left border border-surface-variant">
+<div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Mã đơn hàng</span>
+<span class="font-body-md text-body-md text-primary font-medium">#ORD-99824A</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ngày thanh toán</span>
+<span class="font-body-md text-body-md text-primary">24 Tháng 10, 2024</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-xs">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Phương thức</span>
+<span class="font-body-md text-body-md text-primary">Thẻ tín dụng (**** 1234)</span>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<span class="font-body-md text-body-md text-primary font-medium">Tổng tiền đã thanh toán</span>
+<span class="font-h3 text-h3 text-primary font-bold">1,250,000 ₫</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-md w-full justify-center">
+<button class="bg-primary text-on-primary font-button text-button px-lg py-sm rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+                    Xem thiệp đã mua
+                </button>
+<button class="bg-surface-variant text-primary font-button text-button px-lg py-sm rounded-lg hover:bg-surface-dim transition-colors flex items-center justify-center gap-2 w-full sm:w-auto">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+                    Quay lại trang chủ
+                </button>
+</div>
+</div>
+<!-- Related Suggestions Section -->
+<section class="w-full mt-xl pt-xl border-t border-surface-variant">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-h2 text-h2 text-primary">Gợi ý dành riêng cho bạn</h2>
+<a class="font-button text-button text-primary flex items-center gap-1 hover:underline" href="#">
+                    Xem thêm <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Suggestion Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-variant shadow-[0px_2px_4px_rgba(30,27,75,0.04)] hover:shadow-[0px_10px_25px_rgba(30,27,75,0.08)] transition-shadow group cursor-pointer">
+<div class="h-48 w-full bg-surface-container-high relative overflow-hidden">
+<img alt="Gợi ý thiệp cưới 1" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully crafted minimalist wedding invitation card resting on a pristine marble surface. Soft, diffused daylight casts gentle shadows, highlighting the premium textured cardstock and elegant serif typography. The scene exudes a sophisticated, high-end modern corporate aesthetic with a refined, muted color palette of soft whites and subtle greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiwJuYCDoJ6ZelhJ3sxj9ZLgpElfpGX6EIvcKRPanVkyPUFqzBk5uigEtXfLCighu2KFDvAekBl2ChPdvpxfGYlBWh1vQgENZBW4wMmeBXlKUYO5NROGAteZjXjOIyKc6TGpWEoepIBPx8u-1S0cX26Ic6h8S1ln9CHJRWI-IlPi1nj2D4OXpP0BkHVfjTAY2TiSitRdSQql89xBR9175SG7G7hzQGM09XWEuob61EDaqQGnW49BAM_h8rikWWqDhD_e_BBVseRF4n"/>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-sm">
+<span class="font-label-caps text-label-caps text-primary">Thịnh hành</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-h3 text-h3 text-primary mb-xs truncate">Mùa Thu Lãng Mạn</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Thiệp cưới điện tử kèm hiệu ứng.</p>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-primary font-medium">450,000 ₫</span>
+<span class="material-symbols-outlined text-outline hover:text-primary transition-colors" data-icon="favorite_border">favorite_border</span>
+</div>
+</div>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-variant shadow-[0px_2px_4px_rgba(30,27,75,0.04)] hover:shadow-[0px_10px_25px_rgba(30,27,75,0.08)] transition-shadow group cursor-pointer">
+<div class="h-48 w-full bg-surface-container-high relative overflow-hidden">
+<img alt="Gợi ý thiệp cưới 2" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="An elegant digital invitation design displayed on a sleek tablet screen, surrounded by delicate white floral arrangements. The high-key, soft lighting emphasizes the clean layout and sophisticated deep indigo accents of the user interface. The overall composition reflects a premium, modern minimalist aesthetic typical of a high-end stationery boutique." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVDq-THcC5spb98S6gkViapmLkUQSYQtXUh7v_ouSV3Y-NDs8eoDvVAwdsXHDu8Ubu3wyW9hqUlLU4qJ6su9UgmlOz7T59b2aSLJmnrGzxqEmxhKr0UxI2GZzjjdhui_5RpJ8B_Cv5BvpEnVekJhT1finGt7OYfjUAJTW1mJTBCzXAAcuWxNvviJIlxpqbExLFt24rEk8AMZ0xs3paKimV0V4xcVJPiyBrs1G6SEdNcYFKSH8_eFXsrQXpiPgAe-ktYWZ98pPRG5UK"/>
+</div>
+<div class="p-md">
+<h3 class="font-h3 text-h3 text-primary mb-xs truncate">Tối Giản Hiện Đại</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Mẫu thiệp RSVP tích hợp QR code.</p>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-primary font-medium">320,000 ₫</span>
+<span class="material-symbols-outlined text-outline hover:text-primary transition-colors" data-icon="favorite_border">favorite_border</span>
+</div>
+</div>
+</div>
+<!-- Suggestion Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-surface-variant shadow-[0px_2px_4px_rgba(30,27,75,0.04)] hover:shadow-[0px_10px_25px_rgba(30,27,75,0.08)] transition-shadow group cursor-pointer">
+<div class="h-48 w-full bg-surface-container-high relative overflow-hidden">
+<img alt="Gợi ý thiệp sự kiện 3" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" data-alt="A sophisticated corporate event invitation mockup lying on a clean, light grey desk setting. Subtle ambient shadows provide depth without heavy borders, aligning with a lifted, crisp design system. The scene uses a structured, authoritative visual tone with pristine whites and deep indigo typography, conveying a professional yet inviting atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLli8swftWNA5_0jTABuvfg8YW-Vam6UkICBQnpky1TWHyJTk8_R8tycnGtQkrpxf0MEKGhyGMHEO3alGSJU2g0A40nNjOCHqmO0t5on1K4ZZSSfA20PEB9gcrgdF8LPmG3SVB8maOczDF5UfSXo_w-8beF8vDJ7q5ODRFnEl9otm3brN-IJDuOzwxNuihjZiP4reWoZJfnq0rE_2xKcCQ707d5oOPYX6cMi9vTFkzHKFOOX7jiiQPwH6qVxT14HUMtyVX4mIS2ecm"/>
+<div class="absolute top-2 right-2 bg-secondary-container/90 backdrop-blur-sm px-2 py-1 rounded-sm">
+<span class="font-label-caps text-label-caps text-primary">Mới nhất</span>
+</div>
+</div>
+<div class="p-md">
+<h3 class="font-h3 text-h3 text-primary mb-xs truncate">Dạ Tiệc Doanh Nghiệp</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Thiệp mời sự kiện cao cấp.</p>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-primary font-medium">550,000 ₫</span>
+<span class="material-symbols-outlined text-outline hover:text-primary transition-colors" data-icon="favorite_border">favorite_border</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 full-width bottom-0 border-t border-slate-200 dark:border-slate-800 flat no shadows mt-auto">
+<div class="max-w-[1200px] mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center">
+<div class="mb-4 md:mb-0">
+<span class="font-serif text-lg text-indigo-900 dark:text-indigo-400">Aura Invitations</span>
+</div>
+<nav class="flex gap-6 mb-4 md:mb-0">
+<a class="text-slate-500 dark:text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-indigo-700 dark:hover:text-indigo-300 underline font-label-caps text-label-caps" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-indigo-700 dark:hover:text-indigo-300 underline font-label-caps text-label-caps" href="#">Terms of Service</a>
+<a class="text-slate-500 dark:text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-indigo-700 dark:hover:text-indigo-300 underline font-label-caps text-label-caps" href="#">Contact</a>
+<a class="text-slate-500 dark:text-slate-400 font-sans text-xs uppercase tracking-widest hover:text-indigo-700 dark:hover:text-indigo-300 underline font-label-caps text-label-caps" href="#">Artist Program</a>
+</nav>
+<div>
+<span class="text-slate-900 dark:text-slate-100 font-sans text-xs uppercase tracking-widest font-label-caps text-label-caps">© 2024 Aura Invitations SaaS. All rights reserved.</span>
+</div>
+</div>
+</footer>
+</body></html>
