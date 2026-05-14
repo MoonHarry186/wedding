@@ -164,6 +164,13 @@ export class PaymentsService {
       // Create one invitation per order item
       const invitations: Invitation[] = [];
       for (const item of order.items) {
+        if (!item.templateId) {
+          this.logger.warn(
+            `Order item ${item.id} has no template — skipping invitation generation`,
+          );
+          continue;
+        }
+
         const template = await em.findOne(Template, {
           where: { id: item.templateId },
         });

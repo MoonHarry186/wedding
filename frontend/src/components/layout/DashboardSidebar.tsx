@@ -38,6 +38,18 @@ function buildAntdMenuItems(role: Role): MenuProps["items"] {
     });
 }
 
+function resolveSelectedKey(pathname: string) {
+  const candidates = menuItems.flatMap((item) =>
+    item.type === "group" ? item.children.map((child) => child.href) : [item.href],
+  );
+
+  const matched = candidates
+    .filter((href) => pathname === href || pathname.startsWith(`${href}/`))
+    .sort((a, b) => b.length - a.length)[0];
+
+  return matched ?? pathname;
+}
+
 export function DashboardSidebar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -60,7 +72,7 @@ export function DashboardSidebar() {
   };
 
   // Find the selected key based on current pathname
-  const selectedKey = pathname;
+  const selectedKey = resolveSelectedKey(pathname);
 
   return (
     <Sider
@@ -117,4 +129,3 @@ export function DashboardSidebar() {
     </Sider>
   );
 }
-

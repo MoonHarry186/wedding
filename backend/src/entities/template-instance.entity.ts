@@ -17,8 +17,8 @@ export class TemplateInstance {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'source_template_id' })
-  sourceTemplateId: string;
+  @Column({ name: 'source_template_id', type: 'uuid', nullable: true })
+  sourceTemplateId: string | null;
 
   @Column({ name: 'source_template_version_id', nullable: true })
   sourceTemplateVersionId: string | null;
@@ -32,9 +32,9 @@ export class TemplateInstance {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @ManyToOne(() => Template)
+  @ManyToOne(() => Template, { nullable: true })
   @JoinColumn({ name: 'source_template_id' })
-  sourceTemplate: Template;
+  sourceTemplate: Template | null;
 
   @ManyToOne(() => TemplateVersion, { nullable: true })
   @JoinColumn({ name: 'source_template_version_id' })

@@ -16,8 +16,8 @@ export class OrderItem {
   @Column({ name: 'order_id' })
   orderId: string;
 
-  @Column({ name: 'template_id' })
-  templateId: string;
+  @Column({ name: 'template_id', type: 'uuid', nullable: true })
+  templateId: string | null;
 
   @Column({ name: 'template_title' })
   templateTitle: string;
@@ -29,7 +29,7 @@ export class OrderItem {
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToOne(() => Template)
+  @ManyToOne(() => Template, { nullable: true })
   @JoinColumn({ name: 'template_id' })
-  template: Template;
+  template: Template | null;
 }

@@ -10,7 +10,7 @@ import {
 import { Order } from './order.entity';
 
 export type PaymentStatus = 'pending' | 'success' | 'failed' | 'refunded';
-export type PaymentProvider = 'vnpay' | 'momo' | 'stripe';
+export type PaymentProvider = 'vnpay' | 'momo' | 'stripe' | 'manual';
 
 @Entity('payments')
 export class Payment {

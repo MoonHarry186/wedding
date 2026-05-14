@@ -129,7 +129,7 @@ export interface ApiTemplate {
 
 export type OrderStatus = 'pending' | 'paid' | 'failed' | 'refunded';
 export type PaymentStatus = 'pending' | 'success' | 'failed' | 'refunded';
-export type PaymentProvider = 'vnpay' | 'momo' | 'stripe';
+export type PaymentProvider = 'vnpay' | 'momo' | 'stripe' | 'manual';
 
 export interface ApiPayment {
   id: string;

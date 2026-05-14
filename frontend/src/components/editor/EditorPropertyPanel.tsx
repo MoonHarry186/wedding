@@ -1,18 +1,13 @@
 "use client";
 
 import React from "react";
-import { Button, App } from "antd";
-import { RiInformationLine, RiImageLine, RiMusic2Line } from "@remixicon/react";
+import { Button } from "antd";
+import { RiInformationLine, RiMusic2Line } from "@remixicon/react";
 import {
-  CloseOutlined,
   GroupOutlined,
   NodeCollapseOutlined,
 } from "@ant-design/icons";
 import { useEditorStore } from "@/store/editor.store";
-import { useParams } from "next/navigation";
-import {
-  useTemplate,
-} from "@/hooks/useTemplates";
 import { TextPanel } from "./panels/TextPanel";
 import { ImagePanel } from "./panels/ImagePanel";
 import { CalendarPanel } from "./panels/CalendarPanel";
@@ -38,34 +33,10 @@ type ActiveSelection = {
   id: string;
 };
 
-function getElementTitle(element: CanvasElement | ActiveSelection) {
-  if (element.type === "activeSelection") return "Vùng chọn";
-  if (element.type === "text") return "Văn bản";
-  if (element.type === "image") return "Hình ảnh";
-  if (element.type === "group") return "Nhóm phần tử";
-
-  switch (element.widgetType) {
-    case "countdown":
-      return element.config.title || "Tiện ích";
-    case "calendar":
-      return "Lịch";
-    case "map":
-      return "Bản đồ";
-    case "video":
-      return "Video";
-    case "qr_gift":
-      return "Hộp quà";
-  }
-}
-
 export function EditorPropertyPanel() {
-  const params = useParams();
-  const templateId = params.id as string;
-  useTemplate(templateId);
   const {
     selectedElementIds,
     elements,
-    setSelectedElementIds,
     groupElements,
     ungroupElements,
     previewMode,

@@ -3,7 +3,6 @@ import {
   RiDashboardLine,
   RiLayoutLine,
   RiListCheck,
-  RiEditLine,
   RiShoppingBag3Line,
   RiOrderPlayLine,
   RiUserLine,
@@ -68,7 +67,7 @@ export const menuItems: MenuItem[] = [
     children: [
       { type: 'item', key: 'orders', label: 'Đơn hàng', href: '/dashboard/orders', icon: RiOrderPlayLine, roles: ['owner', 'admin'] },
       { type: 'item', key: 'customers', label: 'Khách hàng', href: '/dashboard/customers', icon: RiUserLine, roles: ['owner', 'admin'] },
-      { type: 'item', key: 'invitations', label: 'Thiệp', href: '/dashboard/invitations', icon: RiMailLine, roles: ['owner', 'admin'] },
+      { type: 'item', key: 'invitations', label: 'Quản lý Thiệp', href: '/dashboard/invitations', icon: RiMailLine, roles: ['owner', 'admin'] },
     ],
   },
   {

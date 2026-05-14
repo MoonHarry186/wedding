@@ -28,6 +28,53 @@ export function useInvitationBySlug(slug: string, token?: string) {
   });
 }
 
+export function useCreateAdminInvitation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: {
+      mode: "blank" | "from_template";
+      templateId?: string;
+    }) => invitationsApi.createAdmin(payload),
+    onSuccess: (invitation) => {
+      queryClient.invalidateQueries({ queryKey: ["invitations"] });
+      queryClient.invalidateQueries({ queryKey: ["invitation", invitation.id] });
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
+}
+
+export function useUpdateInvitationCanvas() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({
+      id,
+      canvasData,
+    }: {
+      id: string;
+      canvasData: Record<string, unknown>;
+    }) => invitationsApi.updateCanvas(id, { canvasData }),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["invitation", variables.id] });
+      queryClient.invalidateQueries({ queryKey: ["invitations"] });
+    },
+  });
+}
+
+export function useUpdateInvitationMeta() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, slug }: { id: string; slug?: string }) =>
+      invitationsApi.updateMeta(id, { slug }),
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["invitation", variables.id] });
+      queryClient.invalidateQueries({ queryKey: ["invitations"] });
+    },
+  });
+}
+
 export function useFillInvitationVariables() {
   const queryClient = useQueryClient();
 
